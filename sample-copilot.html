@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            // Listen for form submission
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+
+                // Get user's message
+                const message = $('#message').val();
+
+                // Send message to chatbot API
+                const settings = {
+                    async: true,
+                    crossDomain: true,
+                    url: 'https://paphus-botlibre.p.rapidapi.com/form-chat', // Make sure this URL is correct
+                    method: 'POST',
+                    headers: {
+                        'X-RapidAPI-Key': '890e5f2917msh701e045bb6bd1d1p19baecjsn05cd7403d313', // Make sure this API key is correct
+                        'X-RapidAPI-Host': 'paphus-botlibre.p.rapidapi.com', // Make sure this host is correct
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        password: 'password',
+                        application: 'myapp',
+                        instance: '1234',
+                        message: message,
+                        userid: 'myuserid',
+                        botid: 'mybot',
+                    }
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
+            });
+    </script>
+</head>
+<body>
+    <h1>Chatbot Example</h1>
+    <form>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message">
+        <button type="submit">Send</button>
+    </form>
+    <div id="chat"></div>
+</body>
+</html>
